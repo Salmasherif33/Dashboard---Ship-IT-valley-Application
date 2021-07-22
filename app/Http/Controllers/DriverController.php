@@ -22,7 +22,6 @@ class DriverController extends Controller
     {
 
         if ($request->ajax()) {
-            //echo "HHHHHHHHHHHHiii";
             $out = '';
             $query = $request->get('query');
             if ($query != '') {

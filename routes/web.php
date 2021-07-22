@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DriverController;
 use App\Http\Controllers\FinancialController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -33,6 +34,8 @@ Route::get('/financial', [FinancialController::class,'show'])->name('admin.finan
 Route::get('/financial/search', [FinancialController::class,'search'])->name('FinancialController.search');
 Route::post('/financial/modify/{financial}', [FinancialController::class, 'modify'])->name('modify');
 
+Route::get('/orders',[OrderController::class,'show'])->name('admin.orders');
+Route::get('orders/search',[OrderController::class,'search'])->name('OrderController.search');
 Route::get('/discounts', [DriverController::class, 'discounts'])->name('admin.discounts');
 Route::get('/userscomplaints', [DriverController::class, 'usersComplaints'])->name('admin.users_complaints');
 Route::get('/driverscomplaints', [DriverController::class, 'driversComplaints'])->name('admin.drivers_complaints');
