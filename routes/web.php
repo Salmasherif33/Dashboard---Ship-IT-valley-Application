@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DriverController;
 use App\Http\Controllers\FinancialController;
+use App\Http\Controllers\ManagersController;
 use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -18,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Auth::routes();
@@ -36,6 +37,14 @@ Route::post('/financial/modify/{financial}', [FinancialController::class, 'modif
 
 Route::get('/orders',[OrderController::class,'show'])->name('admin.orders');
 Route::get('orders/search',[OrderController::class,'search'])->name('OrderController.search');
+
+Route::get('/managers',[ManagersController::class,'show'])->name('admin.managers');
+Route::get('/managers/search',[ManagersController::class,'search'])->name('ManagersController.search');
+Route::post('/manager/edit/{manager}',[ManagersController::class,'edit'])->name('edit');
+Route::post('/manager/delete/{id}',[ManagersController::class,'delete'])->name('delete');
+Route::post('manager/create',[ManagersController::class,'create'])->name('create');
+
+
 Route::get('/discounts', [DriverController::class, 'discounts'])->name('admin.discounts');
 Route::get('/userscomplaints', [DriverController::class, 'usersComplaints'])->name('admin.users_complaints');
 Route::get('/driverscomplaints', [DriverController::class, 'driversComplaints'])->name('admin.drivers_complaints');

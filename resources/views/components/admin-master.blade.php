@@ -60,13 +60,9 @@
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Orders</span></a>
       </li>
+     
       <li class="nav-item">
-        <a class="nav-link" href="index.html">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Statistics</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="{{route('admin.managers')}}">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Managers</span></a>
       </li>
