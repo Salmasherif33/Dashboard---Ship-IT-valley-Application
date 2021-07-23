@@ -16,7 +16,7 @@ class ManagersController extends Controller
 
   public function show()
   {
-    $managers = Admin::select('admins.*')->where('type', '=', 'admin')->paginate(10);
+    $managers = Admin::where('type', '=', 'admin')->select('admins.*')->paginate(10);
     return view('admin.managers', ['managers' => $managers]);
   }
 
@@ -26,12 +26,12 @@ class ManagersController extends Controller
       $out = '';
       $query = $request->get('query');
       if ($query != '') {
-        $admins = Admin::where('name', 'like', '%' . $query . '%')
+        $admins = Admin::where('type', '=', 'admin')->where('name', 'like', '%' . $query . '%')
           ->orWhere('phone', 'like', '%' . $query . '%')
           ->orWhere('role', 'like', '%' . $query . '%')
           ->orWhere('email', 'like', '%' . $query . '%')->paginate(10);
       } else {
-        $admins = Admin::select('admins.*')->paginate(10);
+        $admins = Admin::where('type', '=', 'admin')->select('admins.*')->paginate(10);
       }
       if ($admins->count() > 0) {
         foreach ($admins as $admin) {

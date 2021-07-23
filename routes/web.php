@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\DriverController;
 use App\Http\Controllers\FinancialController;
 use App\Http\Controllers\ManagersController;
@@ -44,11 +45,18 @@ Route::post('/manager/edit/{manager}',[ManagersController::class,'edit'])->name(
 Route::post('/manager/delete/{id}',[ManagersController::class,'delete'])->name('delete');
 Route::post('manager/create',[ManagersController::class,'create'])->name('create');
 
+Route::get('/companies',[CompanyController::class,'show'])->name('admin.companies');
+Route::get('companies/search',[CompanyController::class,'search'])->name('CompanyController.search');
+Route::patch('companies/activate/{company}',[CompanyController::class,'activateCompany'])->name('ActivateCompany');
+Route::post('/companies/delete/{id}',[CompanyController::class,'delete'])->name('deleteCompany');
+Route::post('/companies/edit/{company}',[CompanyController::class,'edit'])->name('editCompany');
+Route::post('/companies/create',[CompanyController::class,'create'])->name('createCompany');
+
+
 
 Route::get('/discounts', [DriverController::class, 'discounts'])->name('admin.discounts');
 Route::get('/userscomplaints', [DriverController::class, 'usersComplaints'])->name('admin.users_complaints');
 Route::get('/driverscomplaints', [DriverController::class, 'driversComplaints'])->name('admin.drivers_complaints');
-
 
 Auth::routes();
 

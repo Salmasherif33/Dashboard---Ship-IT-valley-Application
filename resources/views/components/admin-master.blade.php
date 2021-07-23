@@ -67,7 +67,7 @@
           <span>Managers</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="{{route('admin.companies')}}">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Companies</span></a>
       </li>
