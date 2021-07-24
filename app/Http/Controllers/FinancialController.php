@@ -50,7 +50,7 @@ class FinancialController extends Controller
                      <!-- Button trigger modal -->
                      <button type="button" class="btn btn-primary" data-bs-toggle="modal" 
                      data-bs-target="#example' . $driver->id . 'Modal">
-                        Add fees
+                        Edit
                       </button>
                       <!-- Modal -->
                       <div class="modal fade" id="example' . $driver->id . 'Modal" tabindex="-1" 

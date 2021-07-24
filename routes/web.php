@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\BankController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\DriverController;
 use App\Http\Controllers\FinancialController;
 use App\Http\Controllers\ManagersController;
 use App\Http\Controllers\OrderController;
+use App\Models\Bank;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -62,10 +64,11 @@ Route::post('/companies/edit/{company}',[CompanyController::class,'edit'])->name
 Route::post('/companies/create',[CompanyController::class,'create'])->name('createCompany');
 
 
-
-
-
-
+Route::get('/banks',[BankController::class,'show'])->name('admin.banks');
+Route::get('/banks/search',[BankController::class,'search'])->name('BankController.search');
+Route::post('/banks/delete/{id}',[BankController::class,'delete'])->name('deleteBank');
+Route::post('/banks/edit/{bank}',[BankController::class,'edit'])->name('editBank');
+Route::post('/bank/create',[BankController::class,'create'])->name('createBank');
 
 Route::get('/discounts', [DriverController::class, 'discounts'])->name('admin.discounts');
 Route::get('/userscomplaints', [DriverController::class, 'usersComplaints'])->name('admin.users_complaints');
