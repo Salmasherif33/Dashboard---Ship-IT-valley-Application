@@ -6,6 +6,7 @@ use App\Http\Controllers\DriverController;
 use App\Http\Controllers\FinancialController;
 use App\Http\Controllers\ManagersController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\TruckController;
 use App\Models\Bank;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -69,6 +70,16 @@ Route::get('/banks/search',[BankController::class,'search'])->name('BankControll
 Route::post('/banks/delete/{id}',[BankController::class,'delete'])->name('deleteBank');
 Route::post('/banks/edit/{bank}',[BankController::class,'edit'])->name('editBank');
 Route::post('/bank/create',[BankController::class,'create'])->name('createBank');
+
+
+Route::get('/trucks',[TruckController::class,'show'])->name('admin.trucks');
+Route::get('/trucks/search',[TruckController::class,'search'])->name('TruckController.search');
+Route::post('/trucks/create',[TruckController::class,'create'])->name('createTruck');
+Route::post('/trucks/edit/{truck}',[TruckController::class,'edit'])->name('editTruck');
+Route::post('/trucks/delete/{id}',[TruckController::class,'delete'])->name('deleteTruck');
+Route::patch('/trucks/activate/{truck}',[TruckController::class,'activate'])->name('activateTruck');
+
+
 
 Route::get('/discounts', [DriverController::class, 'discounts'])->name('admin.discounts');
 Route::get('/userscomplaints', [DriverController::class, 'usersComplaints'])->name('admin.users_complaints');
