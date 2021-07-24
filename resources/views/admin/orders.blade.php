@@ -44,10 +44,11 @@
             
           </tbody>
         </table>
+        <input type="hidden" name = "hidden_page" value="1" id="hidden_page">
+
       </div>
     </div>
   </div>
-  {{$orders->links()}}
 
 @endsection
 
@@ -58,15 +59,15 @@
 
 $(document).ready(function(){
   fetch_data();
-  function fetch_data(query=''){
+  function fetch_data(query,page){
   $.ajax({
-    url:"{{route('OrderController.search')}}",
+    url:"/orders/search?page="+page+"&query=",
     method:'GET',
     data:{query:query},
     dataType:'json',
     success:function(data){
+    
       $('tbody').html(data.table_data);
-      //$('#total_records').text(data.total_data);
     }
   })
   }
@@ -74,8 +75,19 @@ $(document).ready(function(){
   $(document).on('keyup', '#search' , function(){
      
     var query = $(this).val(); //fetch the data in the search bar to this var.
-    fetch_data(query);
+    var page = $('#hidden_page').val();
+     fetch_data(query,page);
   });
+
+  $(document).on('click','.pagination a',function(event){
+
+event.preventDefault();
+var page = $(this).attr('href').split('page=')[1];
+$('#hidden_page').val(page);
+var query = $('#serach').val();
+
+fetch_data(query,page);
+});
 });
 
 </script>

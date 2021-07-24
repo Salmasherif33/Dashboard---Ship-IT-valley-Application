@@ -29,8 +29,11 @@ Route::get('/home', [App\Http\Controllers\Controller::class, 'index'])->name('ad
 
 //Route::get('/home', [DriverController::class, 'index'])->name('admin.index');
 Route::get('/showdrivers', [DriverController::class, 'showDrivers'])->name('admin.showDrivers');
-Route::get('showdrivers/search',[DriverController::class,'search'])->name('DriverController.search');
+Route::get('/showdrivers/search',[DriverController::class,'search'])->name('DriverController.search');
 Route::post('/driver/addfees/{driver}', [DriverController::class, 'addfees'])->name('addfees');
+Route::patch('/activate/{driver}', [DriverController::class, 'activateDriver'])->name('activateDriver');
+Route::post('/driver/store', [DriverController::class, 'driverStore'])->name('driverStore');
+
 
 Route::get('/financial', [FinancialController::class,'show'])->name('admin.financial');
 Route::get('/financial/search', [FinancialController::class,'search'])->name('FinancialController.search');
@@ -38,6 +41,12 @@ Route::post('/financial/modify/{financial}', [FinancialController::class, 'modif
 
 Route::get('/orders',[OrderController::class,'show'])->name('admin.orders');
 Route::get('orders/search',[OrderController::class,'search'])->name('OrderController.search');
+Route::get('/requests',[OrderController::class,'showBills'])->name('admin.requests');
+Route::get('/requests/search',[OrderController::class,'searchBills'])->name('OrderController.searchBills');
+Route::patch('/requests/accept/{request}',[OrderController::class,'acceptBill'])->name('acceptOrder');
+Route::post('/requests/refuseBill/{bill}',[OrderController::class,'refuseBill'])->name('refuseBill');
+
+
 
 Route::get('/managers',[ManagersController::class,'show'])->name('admin.managers');
 Route::get('/managers/search',[ManagersController::class,'search'])->name('ManagersController.search');
@@ -54,6 +63,10 @@ Route::post('/companies/create',[CompanyController::class,'create'])->name('crea
 
 
 
+
+
+
+
 Route::get('/discounts', [DriverController::class, 'discounts'])->name('admin.discounts');
 Route::get('/userscomplaints', [DriverController::class, 'usersComplaints'])->name('admin.users_complaints');
 Route::get('/driverscomplaints', [DriverController::class, 'driversComplaints'])->name('admin.drivers_complaints');
@@ -61,8 +74,7 @@ Route::get('/driverscomplaints', [DriverController::class, 'driversComplaints'])
 Auth::routes();
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::patch('/activate/{driver}', [DriverController::class, 'activateDriver'])->name('activateDriver');
-Route::post('/driver/store', [DriverController::class, 'driverStore'])->name('driverStore');
+
 Route::patch('/active/{discount}', [DriverController::class, 'activateDiscount'])->name('activateDiscount');
 Route::delete('/delete/{discount}', [DriverController::class, 'deleteDiscount'])->name('discount.destroy');
 Route::post('/discount/store', [DriverController::class, 'discountStore'])->name('discountStore');

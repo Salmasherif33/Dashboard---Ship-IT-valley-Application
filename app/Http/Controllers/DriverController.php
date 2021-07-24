@@ -101,6 +101,12 @@ class DriverController extends Controller
                     </td>
                   </tr>';
                 }
+
+                $out .= '<tr>
+                <td colspan="3" align="center">'.
+                  $drivers->links() .'
+                </td>
+               </tr>';
             } else {
                 $out .= '  <tr>
                 <td align="center" colspan="5">No Data Found</td>

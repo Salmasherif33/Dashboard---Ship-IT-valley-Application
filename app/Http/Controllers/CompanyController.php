@@ -13,7 +13,7 @@ class CompanyController extends Controller
 {
     //
     public function show(){
-        $companies = Admin::where('type', '=', 'company')->select('admins.*')->paginate(10);
+        $companies = Admin::where('type', 'company')->select('admins.*')->paginate(10);
         return view('admin.companies',['companies'=>$companies]);
     }
 
@@ -22,13 +22,12 @@ class CompanyController extends Controller
             $out = '';
             $query = $request->get('query');
             if ($query != '') {
-              $companies = Admin::where('type', '=', 'company')
-              ->where('name', 'like', '%' . $query . '%')
-                ->orWhere('phone', 'like', '%' . $query . '%')
-                ->orWhere('is_active', 'like', '%' . $query . '%')
-                ->orWhere('email', 'like', '%' . $query . '%')->paginate(10);
+              $companies = Admin::where('type', 'company')->where('name', 'like', '%' . $query . '%')
+              ->where('type', 'company')->orWhere('phone', 'like', '%' . $query . '%')
+              ->where('type', 'company')->orWhere('is_active', 'like', '%' . $query . '%')
+                ->select('admins.*')->paginate(10);
             } else {
-              $companies = Admin::where('type', '=', 'company')->select('admins.*')->paginate(10);
+              $companies = Admin::where('type','company')->select('admins.*')->paginate(10);
             }
             if ($companies->count() > 0) {
               foreach ($companies as $company) {
@@ -130,6 +129,11 @@ class CompanyController extends Controller
                           </td>
                         </tr>';
               }
+              $out .= '<tr>
+                <td colspan="3" align="center">'.
+                  $companies->links() .'
+                </td>
+               </tr>';
             } else {
               $out .= '  <tr>
                       <td align="center" colspan="5">No Data Found</td>

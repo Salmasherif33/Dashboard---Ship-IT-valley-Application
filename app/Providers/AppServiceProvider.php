@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Bill;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
@@ -26,5 +27,7 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         Paginator::useBootstrap();
+        $notifications = Bill::where('status','=','waiting')->get()->count();
+        view()->share('notifications', $notifications);
     }
 }

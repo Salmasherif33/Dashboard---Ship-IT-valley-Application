@@ -72,9 +72,11 @@
           <span>Companies</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="{{route('admin.requests')}}">
           <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Drivers Requests</span></a>
+          <span>Bills Requests</span>
+          <button type="button" class="btn btn-danger">{{$notifications}}</button>
+        </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="index.html">

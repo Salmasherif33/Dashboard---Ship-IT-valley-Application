@@ -1,8 +1,13 @@
 <x-admin-master>
 
+
+
 @section('content')
 
-<h1>Financials</h1>
+
+<h1>Requests</h1>
+
+
 
 @if(session('fail'))
   <div class="alert alert-danger">{{session('fail')}}</div>
@@ -16,7 +21,7 @@
   <br><br>
   <div class="card shadow mb-4">
     <div class="card-header py-3">
-      <h6 class="m-0 font-weight-bold text-primary"> All Financials</h6>
+      <h6 class="m-0 font-weight-bold text-primary"> All Bills</h6>
     </div>
     <div class="card-body">
       <div class="table-responsive">
@@ -24,25 +29,25 @@
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Total benefits</th>
-              <th>Paid money</th>
-              <th>Created at</th>
-              <th>Updated at</th>
-              <th>Modify</th>
+              <th>Name of Order's Owner</th>
+              <th>Payment Price</th>
+              <th>Order Code</th>
+              <th>Order Status</th>
+
             </tr>
           </thead>
 
 
-          <tbody id="dyn">
-            
+          <tbody class="dyn">
+          
           </tbody>
         </table>
         <input type="hidden" name = "hidden_page" value="1" id="hidden_page">
-
       </div>
     </div>
   </div>
+
+  
 
 @endsection
 
@@ -53,36 +58,36 @@
 
 $(document).ready(function(){
   fetch_data();
-  function fetch_data(query,page){
+  function fetch_data(query, page){
   $.ajax({
-    url:"/financial/search?page="+page+"&query=",
+    url:"/requests/search?page="+page+"&query=",
     method:'GET',
     data:{query:query},
     dataType:'json',
     success:function(data){
-    
-      $('tbody').html(data.table_data);
+      $('.dyn').html('');
+      $('.dyn').html(data.table_data);
+      //$('#total_records').text(data.total_data);
     }
   })
   }
-
   $(document).on('keyup', '#search' , function(){
      
-    var query = $(this).val(); //fetch the data in the search bar to this var.
-    var page = $('#hidden_page').val();
+     var query = $(this).val(); //fetch the data in the search bar to this var.
+     var page = $('#hidden_page').val();
      fetch_data(query,page);
-  });
+   });
 
   $(document).on('click','.pagination a',function(event){
 
-event.preventDefault();
-var page = $(this).attr('href').split('page=')[1];
-$('#hidden_page').val(page);
-var query = $('#serach').val();
+    event.preventDefault();
+    var page = $(this).attr('href').split('page=')[1];
+    $('#hidden_page').val(page);
+    var query = $('#serach').val();
 
-fetch_data(query,page);
-});
+    fetch_data(query,page);
+  });
+  
 });
 
 </script>
-
