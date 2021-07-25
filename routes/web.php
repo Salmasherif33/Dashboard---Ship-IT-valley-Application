@@ -4,10 +4,12 @@ use App\Http\Controllers\BankController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\DriverController;
 use App\Http\Controllers\FinancialController;
+use App\Http\Controllers\GoodsController;
 use App\Http\Controllers\ManagersController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\TruckController;
 use App\Models\Bank;
+use App\Models\Good;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -79,7 +81,10 @@ Route::post('/trucks/edit/{truck}',[TruckController::class,'edit'])->name('editT
 Route::post('/trucks/delete/{id}',[TruckController::class,'delete'])->name('deleteTruck');
 Route::patch('/trucks/activate/{truck}',[TruckController::class,'activate'])->name('activateTruck');
 
-
+Route::get('/goods',[GoodsController::class,'show'])->name('admin.goods');
+Route::get('/goods/search',[GoodsController::class,'search'])->name('GoodsController.search');
+Route::post('/goods/create',[GoodsController::class,'create'])->name('createGood');
+Route::post('/goods/edit/{good}',[GoodsController::class,'edit'])->name('editGood');
 
 Route::get('/discounts', [DriverController::class, 'discounts'])->name('admin.discounts');
 Route::get('/userscomplaints', [DriverController::class, 'usersComplaints'])->name('admin.users_complaints');

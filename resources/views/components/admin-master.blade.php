@@ -94,7 +94,7 @@
           <span>Trucks</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="{{route('admin.goods')}}">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Goods</span></a>
       </li>
