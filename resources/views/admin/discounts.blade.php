@@ -22,7 +22,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Add a discount</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
 
@@ -54,7 +54,7 @@
             </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Save changes</button>
+            <button type="submit" class="btn btn-primary">Save</button>
           </div>
         </form>
 
@@ -68,7 +68,7 @@
 
   <div class="card shadow mb-4">
     <div class="card-header py-3">
-      <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+      <h6 class="m-0 font-weight-bold text-primary">All discounts</h6>
     </div>
     <div class="card-body">
       <div class="table-responsive">
@@ -81,54 +81,58 @@
               <th>Status</th>
               <th>End date</th>
               <th>Created at</th>
-              <th>Delete</th>
+              <th>Operations</th>
             </tr>
           </thead>
 
 
-          <tbody>
-            @foreach($discounts as $discount)
-            <tr>
-              <td>{{$discount->code}}</td>
-              <td>{{$discount->discount}}</td>
-              <td>{{$discount->count}}</td>
-              <td>
-              <form method="POST" action="{{route('activateDiscount',$discount)}}">
-                  @csrf
-                  {{ method_field('PATCH') }}
-                  <button type="submit" class="btn btn-primary" style="margin-top: 10px;">
-                    @if($discount->is_active)
-                    Activated
-                    @else
-                    Not Activated
-                    @endif
-                  </button>
+          <tbody id="dyn">
 
-                </form>
-              
-              </td>
-              <td>{{$discount->end_date}}</td>
-              <td>{{$discount->created_at}}</td>
-
-              <td>
-              <form method="POST" action="{{route('discount.destroy',$discount->id)}}" enctype="multipart/form-data">
-                  @csrf
-                  @method('DELETE')
-                  <!--we send post request, but we want delete-->
-                  <button type="submit" class="btn btn-danger">Delete</button>
-                </form>
-              </td>
-            </tr>
-
-            @endforeach
           </tbody>
         </table>
+        <input type="hidden" name = "hidden_page" value="1" id="hidden_page">
       </div>
     </div>
   </div>
-  {{$discounts->links()}}
 
 
 @endsection
 
 </x-admin-master>
+
+<script>
+
+$(document).ready(function(){
+  fetch_data();
+  function fetch_data(query,page){
+  $.ajax({
+    url:"/discounts/search?page="+page+"&query=",
+    method:'GET',
+    data:{query:query},
+    dataType:'json',
+    success:function(data){
+     
+      $('tbody').html(data.table_data);
+    }
+  })
+  }
+
+  $(document).on('keyup', '#search' , function(){
+     console.log("hii");
+    var query = $(this).val(); //fetch the data in the search bar to this var.
+    var page = $('#hidden_page').val();
+     fetch_data(query,page);
+  });
+
+  $(document).on('click','.pagination a',function(event){
+
+event.preventDefault();
+var page = $(this).attr('href').split('page=')[1];
+$('#hidden_page').val(page);
+var query = $('#serach').val();
+
+fetch_data(query,page);
+});
+});
+
+</script>

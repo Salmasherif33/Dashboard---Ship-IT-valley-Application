@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BankController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\DriverController;
 use App\Http\Controllers\FinancialController;
 use App\Http\Controllers\GoodsController;
@@ -86,17 +87,21 @@ Route::get('/goods/search',[GoodsController::class,'search'])->name('GoodsContro
 Route::post('/goods/create',[GoodsController::class,'create'])->name('createGood');
 Route::post('/goods/edit/{good}',[GoodsController::class,'edit'])->name('editGood');
 
-Route::get('/discounts', [DriverController::class, 'discounts'])->name('admin.discounts');
-Route::get('/userscomplaints', [DriverController::class, 'usersComplaints'])->name('admin.users_complaints');
-Route::get('/driverscomplaints', [DriverController::class, 'driversComplaints'])->name('admin.drivers_complaints');
+Route::get('/discounts', [DiscountController::class, 'discounts'])->name('admin.discounts');
+Route::get('/discounts/search',[DiscountController::class,'search'])->name('DiscountController.search');
+Route::patch('/active/{discount}', [DiscountController::class, 'activateDiscount'])->name('activateDiscount');
+Route::delete('/delete/{discount}', [DiscountController::class, 'deleteDiscount'])->name('discount.destroy');
+Route::post('/discount/store', [DiscountController::class, 'discountStore'])->name('discountStore');
+
+
+
+Route::get('/userscomplaints', [DiscountController::class, 'usersComplaints'])->name('admin.users_complaints');
+Route::get('/driverscomplaints', [DiscountController::class, 'driversComplaints'])->name('admin.drivers_complaints');
 
 Auth::routes();
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::patch('/active/{discount}', [DriverController::class, 'activateDiscount'])->name('activateDiscount');
-Route::delete('/delete/{discount}', [DriverController::class, 'deleteDiscount'])->name('discount.destroy');
-Route::post('/discount/store', [DriverController::class, 'discountStore'])->name('discountStore');
 
 // Auth::routes();
 
