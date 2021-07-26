@@ -100,8 +100,8 @@ Route::post('/prices/edit/{price}',[PriceController::class,'edit'])->name('editP
 Route::post('/prices/create',[PriceController::class,'create'])->name('createPrice');
 
 
-Route::get('/userscomplaints', [DiscountController::class, 'usersComplaints'])->name('admin.users_complaints');
-Route::get('/driverscomplaints', [DiscountController::class, 'driversComplaints'])->name('admin.drivers_complaints');
+Route::get('/userscomplaints', [DriverController::class, 'usersComplaints'])->name('admin.users_complaints');
+Route::get('/driverscomplaints', [DriverController::class, 'driversComplaints'])->name('admin.drivers_complaints');
 
 Auth::routes();
 

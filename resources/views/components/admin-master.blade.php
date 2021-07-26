@@ -78,11 +78,7 @@
           <button type="button" class="btn btn-danger">{{$notifications}}</button>
         </a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="index.html">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Subsecribtions</span></a>
-      </li>
+    
       <li class="nav-item">
         <a class="nav-link" href="{{route('admin.banks')}}">
           <i class="fas fa-fw fa-tachometer-alt"></i>
