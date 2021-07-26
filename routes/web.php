@@ -8,6 +8,7 @@ use App\Http\Controllers\FinancialController;
 use App\Http\Controllers\GoodsController;
 use App\Http\Controllers\ManagersController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PriceController;
 use App\Http\Controllers\TruckController;
 use App\Models\Bank;
 use App\Models\Good;
@@ -93,6 +94,10 @@ Route::patch('/active/{discount}', [DiscountController::class, 'activateDiscount
 Route::delete('/delete/{discount}', [DiscountController::class, 'deleteDiscount'])->name('discount.destroy');
 Route::post('/discount/store', [DiscountController::class, 'discountStore'])->name('discountStore');
 
+Route::get('/prices',[PriceController::class,'show'])->name('admin.prices');
+Route::get('prices/search',[PriceController::class,'search'])->name('PriceController.search');
+Route::post('/prices/edit/{price}',[PriceController::class,'edit'])->name('editPrice');
+Route::post('/prices/create',[PriceController::class,'create'])->name('createPrice');
 
 
 Route::get('/userscomplaints', [DiscountController::class, 'usersComplaints'])->name('admin.users_complaints');

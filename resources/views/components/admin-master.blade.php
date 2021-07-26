@@ -104,15 +104,11 @@
           <span>Discounts</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="{{route('admin.prices')}}">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Prices</span></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="index.html">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Bill payment requests</span></a>
-      </li>
+   
       <li class="nav-item">
         <a class="nav-link" href="{{route('admin.users_complaints')}}">
           <i class="fas fa-fw fa-tachometer-alt"></i>
